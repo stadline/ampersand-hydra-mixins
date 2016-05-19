@@ -1,0 +1,19 @@
+{
+  "name": "ampersand-hydra-mixins",
+  "version": "1.0.0",
+  "description": "ampersand-hydra-mixins to use with Hydra models and collections, see http://www.hydra-cg.com/",
+  "main": "mixins.js",
+  "scripts": {
+    "test": "true"
+  },
+  "keywords": [
+    "ampersand",
+    "model",
+    "collection",
+    "rest",
+    "json-ld",
+    "hydra"
+  ],
+  "author": "alex-pex",
+  "license": "ISC"
+}
