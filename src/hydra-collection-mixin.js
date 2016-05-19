@@ -1,7 +1,9 @@
 module.exports = {
-    parse: function (data, options) {
-        console.log("parse collection", data, options);
-
-        return data["hydra:member"];
+    parse: function (data) {
+        if (data['@type'].indexOf("hydra:") === 0) {
+            return data["hydra:member"];
+        } else {
+            return data.members;
+        }
     }
 };
