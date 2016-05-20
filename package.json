@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "ampersand-hydra-mixins to use with Hydra models and collections, see http://www.hydra-cg.com/",
   "main": "mixins.js",
+  "dependencies": {
+    "lodash.assignin": "^4.0.9",
+    "lodash.isempty": "^4.2.1",
+    "lodash.result": "^4.4.0"
+  },
   "scripts": {
     "test": "true"
   },
