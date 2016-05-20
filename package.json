@@ -4,7 +4,10 @@
   "description": "ampersand-hydra-mixins to use with Hydra models and collections, see http://www.hydra-cg.com/",
   "main": "mixins.js",
   "dependencies": {
+    "lodash.assign": "^4.0.9",
     "lodash.assignin": "^4.0.9",
+    "lodash.foreach": "^4.3.0",
+    "lodash.forown": "^4.2.0",
     "lodash.isempty": "^4.2.1",
     "lodash.result": "^4.4.0"
   },

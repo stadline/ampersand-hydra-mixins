@@ -1,8 +1,20 @@
+var result = require('lodash.result');
 var isEmpty = require('lodash.isempty');
+var urlRoot = require('./url-root');
 
 module.exports = {
     parse: function (data) {
-        if (data['@type'].indexOf("hydra:") === 0) {
+        // use @id property to update internal url
+        if (data['@id'].indexOf('/') === 0) {
+            this.url = urlRoot(result(this, 'url')) + data['@id'];
+        } else {
+            this.url = data['@id'];
+        }
+
+        // return results
+        if (!data['@type']) {
+            return [];
+        } else if (data['@type'].indexOf("hydra:") === 0) {
             return data["hydra:member"];
         } else {
             return data.members;

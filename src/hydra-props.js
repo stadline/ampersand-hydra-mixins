@@ -1,6 +1,6 @@
 var assignIn = require('lodash.assignin');
 
-module.exports = function(userProps) {
+module.exports = function (userProps) {
     return assignIn({
         '@context': ['string'],
         '@id': ['string'],
