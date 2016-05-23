@@ -54,6 +54,8 @@ module.exports = {
 
         if (collectionUrl) {
             return urlRoot(collectionUrl);
+        } else if (this.parent) {
+            return this.parent.urlRoot();
         }
     }
 };
