@@ -1,5 +1,4 @@
 var result = require('lodash.result');
-var isEmpty = require('lodash.isempty');
 var urlRoot = require('./url-root');
 
 module.exports = {
@@ -31,7 +30,7 @@ module.exports = {
         var self = this;
         var model = this.get(id);
 
-        if (model && !isEmpty(model.getAttributes({props: true}, true))) {
+        if (model && !model.isEmpty()) {
             return setTimeout(cb.bind(null, null, model), 0);
         }
 

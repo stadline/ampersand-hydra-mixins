@@ -2,6 +2,7 @@ var result = require('lodash.result');
 var mapValues = require('lodash.mapvalues');
 var assign = require('lodash.assign');
 var forOwn = require('lodash.forown');
+var isEmpty = require('lodash.isempty');
 var urlRoot = require('./url-root');
 
 // Throw an error when a URL is needed, and none is supplied.
@@ -13,6 +14,10 @@ module.exports = {
     idAttribute: '@id',
     typeAttribute: '@type',
     extraProperties: 'reject',
+
+    isEmpty: function () {
+        return isEmpty(this.getAttributes({props: true}, true));
+    },
 
     parse: function (data) {
         return mapValues(data, function (value, key) {
