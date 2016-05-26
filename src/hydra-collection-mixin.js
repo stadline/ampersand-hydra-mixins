@@ -3,6 +3,11 @@ var urlRoot = require('./url-root');
 
 module.exports = {
     parse: function (data) {
+        // replace @id property with hydra:view @id if it exists
+        if (data['hydra:view']) {
+            data['@id'] = data['hydra:view']['@id'];
+        }
+
         // use @id property to update internal url
         if (data['@id'].indexOf('/') === 0) {
             this.url = urlRoot(result(this, 'url')) + data['@id'];
