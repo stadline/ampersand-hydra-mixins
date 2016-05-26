@@ -4,6 +4,6 @@ module.exports = function (userProps) {
     return assignIn({
         '@context': ['string'],
         '@id': ['string'],
-        '@type': ['string']
+        '@type': ['string', false, 'hydra:Model']
     }, userProps);
 };
