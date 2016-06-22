@@ -11,6 +11,8 @@ var urlError = function () {
 };
 
 module.exports = {
+    isHydra: true,
+
     idAttribute: '@id',
     typeAttribute: '@type',
     extraProperties: 'reject',
@@ -22,7 +24,7 @@ module.exports = {
     parse: function (data) {
         return mapValues(data, function (value, key) {
             // transform children and collections properties
-            if (key in this._children || key in this._collections) {
+            if (typeof value === 'string' && (key in this._children || key in this._collections)) {
                 return {'@id': value};
             } else {
                 return value;
@@ -35,11 +37,19 @@ module.exports = {
         var res = this.getAttributes(attrOpts, true);
 
         forOwn(this._children, function (value, key) {
-            res[key] = result(this[key], 'url');
+            if (this[key].isHydra) {
+                res[key] = result(this[key], 'url');
+            } else {
+                res[key] = this[key].serialize();
+            }
         }.bind(this));
 
         forOwn(this._collections, function (value, key) {
-            res[key] = result(this[key], 'url');
+            if (this[key].isHydra) {
+                res[key] = result(this[key], 'url');
+            } else {
+                res[key] = this[key].serialize();
+            }
         }.bind(this));
 
         return res;

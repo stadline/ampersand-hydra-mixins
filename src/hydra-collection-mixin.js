@@ -2,6 +2,8 @@ var result = require('lodash.result');
 var urlRoot = require('./url-root');
 
 module.exports = {
+    isHydra: true,
+
     parse: function (data) {
         // replace @id property with hydra:view @id if it exists
         if (data['hydra:view']) {
