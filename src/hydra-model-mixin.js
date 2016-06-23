@@ -14,7 +14,6 @@ module.exports = {
     isHydra: true,
 
     idAttribute: '@id',
-    typeAttribute: '@type',
     extraProperties: 'reject',
 
     isEmpty: function () {
