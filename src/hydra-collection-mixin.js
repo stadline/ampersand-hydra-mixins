@@ -18,12 +18,12 @@ module.exports = {
         }
 
         // return results
-        if (!data['@type']) {
-            return [];
-        } else if (data['@type'].indexOf("hydra:") === 0) {
+        if (data.hasOwnProperty("hydra:member")) {
             return data["hydra:member"];
-        } else {
+        } else if (data.hasOwnProperty("members")) {
             return data.members;
+        } else {
+            return this.models;
         }
     },
 
