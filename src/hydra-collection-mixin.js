@@ -10,9 +10,14 @@ module.exports = {
             data['@id'] = data['hydra:view']['@id'];
         }
 
-        // use @id property to update internal url
+        // transform into absolute url
         if (data['@id'].indexOf('/') === 0) {
-            this.url = urlRoot(result(this, 'url')) + data['@id'];
+            data['@id'] = urlRoot(result(this, 'url')) + data['@id'];
+        }
+
+        // use @id property to update internal url
+        if (data['@id'].indexOf('?') !== -1) {
+            this.url = data['@id'].substr(0, data['@id'].indexOf('?'));
         } else {
             this.url = data['@id'];
         }
