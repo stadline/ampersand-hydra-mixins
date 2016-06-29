@@ -1,9 +1,18 @@
 var result = require('lodash.result');
 var urlRoot = require('./url-root');
+var qs = require('query-string');
+var _ = require('underscore');
 
 module.exports = {
     isHydra: true,
 
+    fetchOptions: function(userOptions) {
+        if (!userOptions.hasOwnProperty('data')) {
+            userOptions.data = _.result(this, 'fetchData') || _.result(this, 'defaultData') || {};
+        }
+
+        return userOptions;
+    },
     parse: function (data) {
         // replace @id property with hydra:view @id if it exists
         if (data['hydra:view']) {
@@ -17,8 +26,10 @@ module.exports = {
 
         // use @id property to update internal url
         if (data['@id'].indexOf('?') !== -1) {
+            this.fetchData = qs.parse(qs.extract(data['@id']));
             this.url = data['@id'].substr(0, data['@id'].indexOf('?'));
         } else {
+            this.fetchData = null;
             this.url = data['@id'];
         }
 
