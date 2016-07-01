@@ -25,5 +25,6 @@
     "hydra"
   ],
   "author": "alex-pex",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": "stadline/ampersand-hydra-mixins"
 }
