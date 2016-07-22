@@ -56,7 +56,7 @@ module.exports = {
 
     url: function () {
         if (this.isNew()) {
-            return result(this.collection, 'url') || urlError();
+            return result(this.collection, 'url') || undefined;
         } else {
             var base = result(this, 'urlRoot') || urlError();
             return base + this.getId();
