@@ -1,5 +1,4 @@
 var result = require('lodash.result');
-var urlRoot = require('./url-root');
 var qs = require('query-string');
 var _ = require('underscore');
 
@@ -19,18 +18,19 @@ module.exports = {
             data['@id'] = data['hydra:view']['@id'];
         }
 
-        // transform into absolute url
-        if (data['@id'].indexOf('/') === 0) {
-            data['@id'] = urlRoot(result(this, 'url')) + data['@id'];
+        // transform into relative url
+        var urlRoot = result(this, 'urlRoot');
+        if (data['@id'].indexOf(urlRoot) === 0) {
+            data['@id'] = data['@id'].substr(urlRoot.length);
         }
 
         // use @id property to update internal url
         if (data['@id'].indexOf('?') !== -1) {
             this.fetchData = qs.parse(qs.extract(data['@id']));
-            this.url = data['@id'].substr(0, data['@id'].indexOf('?'));
+            this.url = urlRoot + data['@id'].substr(0, data['@id'].indexOf('?'));
         } else {
             this.fetchData = null;
-            this.url = data['@id'];
+            this.url = urlRoot + data['@id'];
         }
 
         // return results

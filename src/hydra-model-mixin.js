@@ -3,7 +3,6 @@ var mapValues = require('lodash.mapvalues');
 var assign = require('lodash.assign');
 var forOwn = require('lodash.forown');
 var isEmpty = require('lodash.isempty');
-var urlRoot = require('./url-root');
 
 // Throw an error when a URL is needed, and none is supplied.
 var urlError = function () {
@@ -37,7 +36,7 @@ module.exports = {
 
         forOwn(this._children, function (value, key) {
             if (this[key].isHydra) {
-                res[key] = result(this[key], 'url');
+                res[key] = result(this[key], 'getId');
             } else {
                 res[key] = this[key].serialize();
             }
@@ -45,7 +44,7 @@ module.exports = {
 
         forOwn(this._collections, function (value, key) {
             if (this[key].isHydra) {
-                res[key] = result(this[key], 'url');
+                res[key] = result(this[key], 'getId');
             } else {
                 res[key] = this[key].serialize();
             }
@@ -58,18 +57,8 @@ module.exports = {
         if (this.isNew()) {
             return result(this.collection, 'url') || undefined;
         } else {
-            var base = result(this, 'urlRoot') || urlError();
+            var base = result(this, 'urlRoot');
             return base + this.getId();
-        }
-    },
-
-    urlRoot: function () {
-        var collectionUrl = result(this.collection, 'url');
-
-        if (collectionUrl) {
-            return urlRoot(collectionUrl);
-        } else if (this.parent) {
-            return this.parent.urlRoot();
         }
     }
 };
