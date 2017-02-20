@@ -2,6 +2,11 @@ var result = require('lodash.result');
 var qs = require('query-string');
 var _ = require('underscore');
 
+// Throw an error when a URL is needed, and none is supplied.
+var urlError = function () {
+    throw new Error('A "url" property or function must be specified');
+};
+
 module.exports = {
     isHydra: true,
 
@@ -19,7 +24,7 @@ module.exports = {
         }
 
         // transform into relative url
-        var urlRoot = result(this, 'urlRoot');
+        var urlRoot = result(this, 'urlRoot') || urlError();
         if (data['@id'].indexOf(urlRoot) === 0) {
             data['@id'] = data['@id'].substr(urlRoot.length);
         }
