@@ -1,6 +1,6 @@
 {
   "name": "ampersand-hydra-mixins",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ampersand-hydra-mixins to use with Hydra models and collections, see http://www.hydra-cg.com/",
   "main": "mixins.js",
   "dependencies": {
